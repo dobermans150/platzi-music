@@ -1,20 +1,54 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="ion-padding">
+  <ion-slides pager="true" [options]="slideOpts">
+    <!-- Slide 1 -->
+    <ion-slide>
+      <ion-icon name="close"></ion-icon>
+      <img src="../../assets/img/logo.png" alt="Platzi Music Logo" />
+      <h1>Escucha tu música</h1>
+      <h2>EN CUALQUIER LUGAR</h2>
+      <p>
+        Los mejores álbunes, las mejores canciones. Escucha y comparte en
+        cualquier momento, a todas horas.
+      </p>
+      <ion-icon name="play"></ion-icon>
+    </ion-slide>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <!-- Slide 2 -->
+    <ion-slide>
+      <ion-icon name="close"></ion-icon>
+      <img src="../../assets/img/logo.png" alt="Platzi Music Logo" />
+      <h1>Disfruta de nuestro reproductor</h1>
+      <h2>DE VIDEOS INCREÍBLES</h2>
+      <p>
+        Entra al modo video de nuestro reproducto y obtén acceso a clips,
+        documentales y making offs increibles de tu artista favorito
+      </p>
+      <ion-icon name="videocam"></ion-icon>
+    </ion-slide>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+    <!-- Slide 3 -->
+    <ion-slide>
+      <ion-icon name="close"></ion-icon>
+      <img src="../../assets/img/logo.png" alt="Platzi Music Logo" />
+      <h1>Accede al exclusivo</h1>
+      <h2>MODO DEPORTE</h2>
+      <p>
+        Crea una playlist basada en tu actividad física. <br />
+        Ten reportes y accesi a lo que necesites, ¡integrado con GPS!
+      </p>
+      <ion-icon name="bicycle-outline"></ion-icon>
+    </ion-slide>
+
+    <!-- slide 4 -->
+    <ion-slide>
+      <ion-icon name="close"></ion-icon>
+      <img src="../../assets/img/logo.png" alt="Platzi Music Logo" />
+      <h1>Acede a nuestra aplicacion</h1>
+      <H2>ADAPTADO PARA TI</H2>
+      <p>
+        Y podras disfrutar de cada una de las funcionalidades que trae para ti
+      </p>
+      <ion-icon name="musical-notes-outline"></ion-icon>
+    </ion-slide>
+  </ion-slides>
 </ion-content>
