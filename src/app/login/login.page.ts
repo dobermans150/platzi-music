@@ -69,4 +69,10 @@ export class LoginPage implements OnInit {
       this.errorMessage = error;
     }
   }
+
+  /* Funcion para redireccioanr a la pagian de registro */
+
+  goToRegister(){
+    this.navCtrl.navigateForward('/register');
+  }
 }
