@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { AuthenticateService } from '../services/authenticate.service';
 import { NavController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-login',
@@ -29,12 +30,13 @@ export class LoginPage implements OnInit {
     ],
   };
 
-  errorMessage: string = '';
+  errorMessage = '';
 
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthenticateService,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private storage: Storage
   ) {
     this.loginForm = this.formBuilder.group({
       email: new FormControl(
@@ -61,9 +63,10 @@ export class LoginPage implements OnInit {
       const authValidator = await this.authService.loginUser(credentials);
 
       this.errorMessage = '';
+      await this.storage.set('isUserLoggedIn', true); // con esto le decimos a ionic que alamacene en storage local del dispositivo
       this.navCtrl.navigateForward('/home');
     } catch (error) {
-      console.log(error);
+      this.errorMessage = error;
     }
   }
 }
