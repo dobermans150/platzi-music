@@ -58,7 +58,7 @@ export class IntroPage implements OnInit {
   /* Funcion para cerrar las pestañas de intro */
   finish(){
     this.storage.set('isIntroShowed', true);
-    this.router.navigateByUrl('/home');
+    this.router.navigateByUrl('/menu/home');
   }
 
   ngOnInit() {

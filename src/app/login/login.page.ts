@@ -64,15 +64,17 @@ export class LoginPage implements OnInit {
 
       this.errorMessage = '';
       await this.storage.set('isUserLoggedIn', true); // con esto le decimos a ionic que alamacene en storage local del dispositivo
-      this.navCtrl.navigateForward('/home');
+      this.navCtrl.navigateForward('/menu/home');
     } catch (error) {
+      console.log(credentials);
+
       this.errorMessage = error;
     }
   }
 
   /* Funcion para redireccioanr a la pagian de registro */
 
-  goToRegister(){
+  goToRegister() {
     this.navCtrl.navigateForward('/register');
   }
 }

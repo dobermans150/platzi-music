@@ -14,13 +14,18 @@ export class AuthenticateService {
     const userStorage = await this.storage.get('user');
 
     return new Promise((accept, reject) => {
-      if (
-        (email === 'test@test.com' && password === '12345') ||
-        (email === userStorage.email && password === userStorage.password)
-      ) {
-        accept('Login correcto');
+      if (userStorage) {
+        if (email === userStorage.email && password === userStorage.password) {
+          accept('Login correcto');
+        } else {
+          reject('Login incorrecto');
+        }
       } else {
-        reject('Login incorrecto');
+        if (email === 'test@test.com' && password === '12345') {
+          accept('Login correcto');
+        } else {
+          reject('Login incorrecto');
+        }
       }
     });
   }
