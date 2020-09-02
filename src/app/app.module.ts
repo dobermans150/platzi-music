@@ -10,16 +10,23 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 /* Se importa este modulo para acceder al almacenamiento local del dispositivo. */
 import { IonicStorageModule } from '@ionic/storage';
+import { SongsModalPageModule } from './songs-modal/songs-modal.module';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicStorageModule.forRoot()],
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    IonicStorageModule.forRoot(),
+    SongsModalPageModule,
+  ],
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
