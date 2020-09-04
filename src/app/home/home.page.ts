@@ -35,24 +35,29 @@ export class HomePage {
         console.log(response);
 
         /* Registrar todo en las variables de song y albums */
-        this.songs = response.filter((e) => e.type === 'single');
-        this.albums = response.filter((e) => e.type === 'album');
+        /* this.songs = response.filter((e) => e.type === 'single');
+        this.albums = response.filter((e) => e.type === 'album'); */
         console.log(this.albums, this.songs);
       })
       .catch((error) => console.log(error));
+
+    this.musicService.getSpotifyNewReleases().then((response) => {
+      this.songs = response.filter((e) => e.album_type === 'single');
+      this.albums = response.filter((e) => e.album_type === 'album');
+    });
   }
 
   async showSongs(artist) {
-    const songs = await this.musicService.getArtistTopTracks(artist.id);
+    const songs = await this.musicService.getSpotifyArtistTopTracks(artist.id);
     const modal = await this.modalController.create({
       component: SongsModalPage,
       componentProps: {
-        songs: songs[0].tracks,
+        songs: songs,
         artist: artist.name,
       },
     });
 
-    console.log(songs[0].tracks);
+    console.log(songs);
 
     modal
       .onDidDismiss()
