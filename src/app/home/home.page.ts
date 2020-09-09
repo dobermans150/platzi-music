@@ -12,7 +12,9 @@ export class HomePage {
   atists: any[] = [];
   songs: any[] = [];
   albums: any[] = [];
-  song = {};
+  song = { playing: false };
+  currentSong = {};
+  newtime;
 
   slideOpts = {
     initialSlide: 0,
@@ -47,17 +49,16 @@ export class HomePage {
     });
   }
 
+  /* Mirar canciones tracks de un artista */
   async showSongs(artist) {
     const songs = await this.musicService.getSpotifyArtistTopTracks(artist.id);
     const modal = await this.modalController.create({
       component: SongsModalPage,
       componentProps: {
-        songs: songs,
+        songs,
         artist: artist.name,
       },
     });
-
-    console.log(songs);
 
     modal
       .onDidDismiss()
@@ -69,11 +70,63 @@ export class HomePage {
     return await modal.present();
   }
 
+  /* Mirar canciones tracks de un albun */
+
+  async showSongsAlbum(album) {
+    try {
+      const songs = await this.musicService.getAlbumTopTracks(album.id);
+      const modal = await this.modalController.create({
+        component: SongsModalPage,
+        componentProps: {
+          songs,
+          album: album.name,
+        },
+      });
+
+      modal
+        .onDidDismiss()
+        .then((dataReturn) => {
+          this.song = dataReturn.data;
+        })
+        .catch((error) => console.log(error));
+
+      return await modal.present();
+    } catch (error) {}
+  }
+
+  /* Funcion de play */
+
   play() {
+    this.currentSong = new Audio(this.song.preview_url);
+    this.currentSong.play();
+    this.currentSong.addEventListener('timeupdate', () => {
+      this.newtime =
+        (1 / this.currentSong.duration) * this.currentSong.currentTime;
+    });
     this.song.playing = true;
   }
 
+  /* funcion de pausa  */
   pause() {
+    this.currentSong.pause();
     this.song.playing = false;
+  }
+
+  /* Partir el tiempo */
+  parseTime(time = '0.00') {
+    const partTime = parseInt(time.toString().split('.')[0], 10);
+    let minutes = Math.floor(partTime / 60).toString();
+
+    if (minutes.length === 1) {
+      minutes = '0' + minutes;
+    }
+
+    let seconds = (partTime % 60).toString();
+
+    if (seconds.length === 1) {
+      seconds = '0' + seconds;
+    }
+
+    return minutes + ':' + seconds;
   }
 }

@@ -83,7 +83,7 @@ export class PlatziMusicService {
       };
 
       const newReleases = await fetch(
-        'https://api.spotify.com/v1/browse/new-releases',
+        'https://api.spotify.com/v1/browse/new-releases?limit=50&country=US',
         miInit
       );
 
@@ -112,7 +112,7 @@ export class PlatziMusicService {
       };
 
       const topTracks = await fetch(
-        `https://api.spotify.com/v1/artists/${artistId}/top-tracks?country=EC`,
+        `https://api.spotify.com/v1/artists/${artistId}/top-tracks?country=US`,
         miInit
       );
 
@@ -122,5 +122,31 @@ export class PlatziMusicService {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  async getAlbumTopTracks(albumId) {
+    try {
+      const auth = await this.getToken();
+      const { access_token, token_type } = auth;
+      const myHeaders = new Headers({
+        'Content-type': 'application/x-www-form-urlencoded',
+        Authorization: `${token_type} ${access_token}`,
+      });
+      const miInit = {
+        method: 'GET',
+        headers: myHeaders,
+        /* body: myBody, */
+        /* mode: 'cors', */
+      };
+
+      const topTracks = await fetch(
+        `https://api.spotify.com/v1/albums/${albumId}/tracks?market=US&limit=50`,
+        miInit
+      );
+
+      const topTracksJson = await topTracks.json();
+
+      return topTracksJson.items;
+    } catch (error) {}
   }
 }
