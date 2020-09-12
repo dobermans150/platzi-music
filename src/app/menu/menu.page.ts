@@ -32,4 +32,19 @@ export class MenuPage implements OnInit {
       console.log(error);
     }
   }
+
+  goToSettings() {
+    this.navCtlr.navigateRoot('menu/settings');
+    this.menu.close();
+  }
+
+  goToHome() {
+    this.navCtlr.navigateRoot('menu/home');
+    this.menu.close();
+  }
+
+  goToSports() {
+    this.navCtlr.navigateRoot('menu/sports');
+    this.menu.close();
+  }
 }

@@ -12,8 +12,12 @@ export class HomePage {
   atists: any[] = [];
   songs: any[] = [];
   albums: any[] = [];
-  song = { playing: false };
-  currentSong = {};
+  song: { playing: boolean; preview_url: string; name: string } = {
+    preview_url: '',
+    playing: false,
+    name: '',
+  };
+  currentSong: HTMLAudioElement;
   newtime;
 
   slideOpts = {
@@ -113,7 +117,7 @@ export class HomePage {
   }
 
   /* Partir el tiempo */
-  parseTime(time = '0.00') {
+  parseTime(time: number) {
     const partTime = parseInt(time.toString().split('.')[0], 10);
     let minutes = Math.floor(partTime / 60).toString();
 

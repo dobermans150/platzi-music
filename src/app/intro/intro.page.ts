@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {Storage} from '@ionic/storage';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-intro',
   templateUrl: './intro.page.html',
   styleUrls: ['./intro.page.scss'],
 })
-export class IntroPage implements OnInit {
+export class IntroPage {
   public slideOpts = {
     initialSlide: 0,
     slidesPerView: 1,
@@ -53,15 +53,11 @@ export class IntroPage implements OnInit {
   ];
   /* Injectamos el Router en nuestro componente para controlar las rutas */
   /* Injectamos el modulo de Storage para poder almacenar nuestras variables en cualquier dispositivo. */
-  constructor(private router: Router, private storage: Storage) { }
+  constructor(private router: Router, private storage: Storage) {}
 
   /* Funcion para cerrar las pestañas de intro */
-  finish(){
+  finish() {
     this.storage.set('isIntroShowed', true);
     this.router.navigateByUrl('/menu/home');
   }
-
-  ngOnInit() {
-  }
-
 }
